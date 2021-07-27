@@ -69,7 +69,7 @@ Not all keymaps are ones you defined yourself. You can also create "virtual" key
 
 ```lua
 function M.treesitter_text_objects()
-    require("nvim-treesitrer.configs").setup {
+    require("nvim-treesitter.configs").setup {
         textobjects = {
             select = {
                 enable = true,
@@ -124,8 +124,8 @@ local function is_module_available(name)
     end
 end
 
-if is_module_available("nvim_mapper") then
-    local mapper = require("nvim_mapper")
+if is_module_available("nvim-mapper") then
+    local mapper = require("nvim-mapper")
 
     M.map = function(mode, keys, cmd, options, category, unique_identifier,
                      description)
