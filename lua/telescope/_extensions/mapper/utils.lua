@@ -63,7 +63,7 @@ M.get_mappers = function()
         for j, _ in pairs(records) do
             if (string.find(rg_record, records[j].unique_identifier) ~= nil) then
                 -- Get the file path and line number for mappings
-                local rg_record_split = Split(rg_record, ":")
+                local rg_record_split = vim.split(rg_record, ":")
 
                 -- Get file path
                 records[j].filename = rg_record_split[1]
@@ -123,14 +123,6 @@ function Record_buf_lines(record)
     table.insert(lines, record.description)
 
     return lines
-end
-
-function Split(s, delimiter)
-    local result = {};
-    for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
-        table.insert(result, match);
-    end
-    return result;
 end
 
 return M
