@@ -3,7 +3,7 @@ This neovim plugin aims at helping you keep track of your keymaps.
 It is meant to work with the [telescope](https://github.com/nvim-telescope/telescope.nvim) plugin.
 It helps you search for currently active keymaps, get info about them, and jump to their definition if you want to change them.
 
-![Demo](demo.gif)
+![demo](https://user-images.githubusercontent.com/36456999/127230715-88411776-3ff1-40ca-85f9-4cad75f6d2cb.gif)
 
 Installation
 ============
