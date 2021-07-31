@@ -13,7 +13,20 @@ Install using your favorite plugin manager ! Here with packer :
 ```lua
 use {
     "lazytanuki/nvim-mapper",
-    config = function() require("nvim-mapper").setup{} end
+    config = function() require("nvim-mapper").setup{} end,
+    before = "telescope.nvim"
+}
+```
+
+> Note that nvim-mapper needs to be one of the first plugins to load, if you want to use it to define your keymaps in the other plugins configuration functions.
+
+Then in your Telescope config function, you may call the `load_extension("mapper")` function to load the Telescope extension, like so :
+
+```lua
+use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
+    config = function() require("telescope").load_extension("mapper") end
 }
 ```
 
