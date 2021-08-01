@@ -3,15 +3,6 @@ local job = require("plenary.job")
 
 local M = {}
 
--- The file path to telescope mappers
-M.telescope_mappers_file = vim.fn.stdpath('data') .. '/telescope-mappers.txt'
-
--- Initialize file if does not exist
-M.init_file = function()
-    local file_path = Path:new(M.telescope_mappers_file)
-    if not file_path:exists() then file_path:touch() end
-end
-
 -- Fetches mapper information to be passed to picker
 M.get_mappers = function()
     -- Search path

@@ -15,6 +15,9 @@ M.previewer = defaulter(function(_)
                     local lines = entry.lines
                     vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
 
+                    -- Set wrap for the preview window
+                    vim.api.nvim_win_set_option(self.state.winid, "wrap", true)
+
                     -- Color
                     local syntax_matches = {
                         nvim_mapper_id = "^Id",
