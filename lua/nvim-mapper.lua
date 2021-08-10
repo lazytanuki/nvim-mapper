@@ -104,6 +104,13 @@ function M.setup(opts)
     else
         vim.g.mapper_search_path = os.getenv("HOME") .. "/.config/nvim/lua"
     end
+
+    -- Selected action
+    if opts.action_on_enter ~= nil then
+        vim.g.mapper_action_on_enter = opts.action_on_enter
+    else
+        vim.g.mapper_action_on_enter = "definition"
+    end
 end
 
 return M
