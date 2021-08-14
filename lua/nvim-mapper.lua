@@ -25,30 +25,20 @@ local function map(virtual, buffnr, mode, keys, cmd, options, category,
         buffer_only = buffer_only
     }
 
-    local new_records = vim.g.mapper_records
+    maybe_existing_record = vim.g.mapper_records[unique_identifier]
 
-    -- Check unique_identifier collisons
-    local already_defined = false
-    for i, _ in pairs(vim.g.mapper_records) do
-        local other_record = vim.g.mapper_records[i]
-        if (other_record.unique_identifier == unique_identifier) then
-            already_defined = true
-            -- If the exact same mapping exists, do not redefine
-            -- If the same unique_identifier exists but the rest is not the same, print error
-            if (other_record.mode == mode and other_record.keys == keys and
-                other_record.cmd == cmd and other_record.category == category and
-                other_record.description == description) then
-            else
-                print(
-                    "Mapper error : unique identifier " .. unique_identifier ..
-                        " cannot be used twice")
-            end
-
-        end
+    if maybe_existing_record == nil then
+        local new_records = vim.g.mapper_records
+        new_records[unique_identifier] = record
+        vim.g.mapper_records = new_records
+    elseif (maybe_existing_record.mode ~= mode or
+            maybe_existing_record.keys ~= keys or
+            maybe_existing_record.cmd ~= cmd or
+            maybe_existing_record.category ~= category or
+            maybe_existing_record.description ~= description) then
+        print("Mapper error : unique identifier " .. unique_identifier ..
+              " cannot be used twice")
     end
-
-    if not already_defined then table.insert(new_records, record) end
-    vim.g.mapper_records = new_records
 
     -- Set the mapping
     if not virtual then
