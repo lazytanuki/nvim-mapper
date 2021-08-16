@@ -17,12 +17,10 @@ M.get_mappers = function()
     end
 
     -- For each record, build a regex
-    for i, _ in pairs(records) do
-        local unique_identifier = records[i].unique_identifier
-
+    for unique_identifier, record in pairs(records) do
         local regex = '\\((.+,\\s*)+"' .. unique_identifier .. '"\\s*,.+\\)'
         table.insert(regex_table, regex)
-        records[i].regex = regex
+        record.regex = regex
     end
 
     -- Use rg to find all of these regex in one run
@@ -67,11 +65,17 @@ M.get_mappers = function()
     end
 
     -- Create the mapping scratch buffers text
-    for i, _ in pairs(records) do
-        records[i].lines = Record_buf_lines(records[i])
+    for _, record in pairs(records) do
+        record.lines = Record_buf_lines(record)
     end
 
-    return records
+    -- Telescope wants an indexed array
+    local indexed_records = {}
+    for _, record in pairs(records) do
+      table.insert(indexed_records, record)
+    end
+
+    return indexed_records
 end
 
 -- Make the text that is displayed in the preview
