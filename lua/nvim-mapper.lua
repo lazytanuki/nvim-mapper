@@ -102,7 +102,7 @@ function M.setup(opts)
     if opts.search_path ~= nil then
         vim.g.mapper_search_path = opts.search_path
     else
-        vim.g.mapper_search_path = os.getenv("HOME") .. "/.config/nvim/lua"
+        vim.g.mapper_search_path = vim.fn.stdpath('config') .. "/lua"
     end
 end
 
