@@ -9,7 +9,7 @@ M.get_mappers = function()
     local search_dir = vim.g.mapper_search_path
 
     -- Initialization
-    local records = vim.g.mapper_records
+    local records = require('nvim-mapper').mapper_records
     local regex_table = {}
 
     if records == nil then
