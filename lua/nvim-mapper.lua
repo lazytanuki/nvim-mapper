@@ -1,11 +1,10 @@
 -- nvim-mapper
 local M = {}
+M.mapper_records = {}
 
 -- Set a mapping
 local function map(virtual, buffnr, mode, keys, cmd, options, category,
                    unique_identifier, description)
-
-    if vim.g.mapper_records == nil then vim.g.mapper_records = {} end
 
     local buffer_only
     if buffnr == nil then
@@ -25,12 +24,10 @@ local function map(virtual, buffnr, mode, keys, cmd, options, category,
         buffer_only = buffer_only
     }
 
-    maybe_existing_record = vim.g.mapper_records[unique_identifier]
+    maybe_existing_record = M.mapper_records[unique_identifier]
 
     if maybe_existing_record == nil then
-        local new_records = vim.g.mapper_records
-        new_records[unique_identifier] = record
-        vim.g.mapper_records = new_records
+        M.mapper_records[unique_identifier] = record
     elseif (maybe_existing_record.mode ~= mode or
             maybe_existing_record.keys ~= keys or
             maybe_existing_record.cmd ~= cmd or

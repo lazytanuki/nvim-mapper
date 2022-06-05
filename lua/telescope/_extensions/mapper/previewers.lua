@@ -1,6 +1,7 @@
 local previewers = require("telescope.previewers")
 local utils = require('telescope.utils')
 local defaulter = utils.make_default_callable
+local mapper = require('nvim-mapper')
 
 local M = {}
 
@@ -9,7 +10,7 @@ M.previewer = defaulter(function(_)
         title = "Mapping details",
         define_preview = function(self, entry, _)
             -- Find the mapping corresponding to the entry
-            if vim.g.mapper_records[entry.unique_identifier] == nil then return end
+            if mapper.mapper_records[entry.unique_identifier] == nil then return end
 
             -- Write the entry lines
             local lines = entry.lines
