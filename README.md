@@ -172,8 +172,8 @@ else
     M.map = function(mode, keys, cmd, options, _, _, _)
         vim.api.nvim_set_keymap(mode, keys, cmd, options)
     end
-    M.map_buf = function(mode, keys, cmd, options, _, _, _)
-        vim.api.nvim_buf_set_keymap(mode, keys, cmd, options)
+    M.map_buf = function(bufnr, mode, keys, cmd, options, _, _, _)
+        vim.api.nvim_buf_set_keymap(bufnr, mode, keys, cmd, options)
     end
     M.map_virtual = function(_, _, _, _, _, _, _) return end
     M.map_buf_virtual = function(_, _, _, _, _, _, _) return end
