@@ -74,7 +74,7 @@ vim.keymap.set({ "i", "s" }, '<c-k>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
-end, {silent = true, noremap = true})
+end, {silent = true})
 
 -- The same using nvim-mapper
 Mapper = require("nvim-mapper")
@@ -87,7 +87,7 @@ Mapper.map({ "i", "s" }, '<c-k>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump(1)
   end
-end, {silent = true, noremap = true}, "Snippets", "snippet_jump_or_expand", "Expand or jump to next snippet placeholder")
+end, {silent = true}, "Snippets", "snippet_jump_or_expand", "Expand or jump to next snippet placeholder")
 ```
 
 ### Buffer keymaps :
