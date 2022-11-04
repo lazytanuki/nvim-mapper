@@ -66,22 +66,63 @@ Defining a keymap with nvim-mapper is pretty much the same as with the stock lua
 
 ```lua
 -- A stock keymap
+-- For Neovim < v0.7.0
 vim.api.nvim_set_keymap('n', '<leader>P', ":MarkdownPreview<CR>", {silent = true, noremap = true})
+
+-- For Neovim >= v0.7.0
+vim.keymap.set({ "i", "s" }, '<c-k>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end, {silent = true})
 
 -- The same using nvim-mapper
 Mapper = require("nvim-mapper")
+
+-- For Neovim < v0.7.0
 Mapper.map('n', '<leader>P', ":MarkdownPreview<CR>", {silent = true, noremap = true}, "Markdown", "md_preview", "Display Markdown preview in Qutebrowser")
+
+-- For Neovim >= 0.7.0
+Mapper.map({ "i", "s" }, '<c-k>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump(1)
+  end
+end, {silent = true}, "Snippets", "snippet_jump_or_expand", "Expand or jump to next snippet placeholder")
 ```
 
 ### Buffer keymaps :
 
 ```lua
 -- A stock buffer keymap
+-- For Neovim < v0.7.0
 vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true, silent = true})
+
+-- For Neovim >= v0.7.0
+vim.keymap.set({ "i", "s" }, '<c-k>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump()
+  end
+end, {silent = true, buffer = 5})
 
 -- The same using nvim-mapper
 Mapper = require("nvim-mapper")
+
+-- For Neovim < v0.7.0
 Mapper.map_buf(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true, silent = true}, "LSP", "lsp_definitions", "Go to definition")
+
+-- For Neovim >= 0.7.0
+Mapper.map_buf(bufnr, { "i", "s" }, '<c-k>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump(1)
+  end
+end, {silent = true}, "Snippets", "snippet_jump_or_expand", "Expand or jump to next snippet placeholder")
+
+-- Alternatively for Neovim >= 0.7.0, the standard map() function can be used, specifying bufnr in the options table
+Mapper.map({ "i", "s" }, '<c-k>', function()
+  if ls.expand_or_jumpable() then
+    ls.expand_or_jump(1)
+  end
+end, {silent = true, buffer = bufnr}, "Snippets", "snippet_jump_or_expand", "Expand or jump to next snippet placeholder")
 ```
 
 ### Virtual keymaps :
