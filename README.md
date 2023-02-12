@@ -1,3 +1,13 @@
+Warning
+=======
+
+This plugin has been moved to [gregorias/nvim-mapper](https://github.com/gregorias/nvim-mapper) (thanks Gregorias for taking over!).
+
+This repository should be considered deprecated.
+
+nvim-mapper
+===========
+
 This neovim plugin aims at helping you keep track of your keymaps.
 
 It is meant to work with the [telescope](https://github.com/nvim-telescope/telescope.nvim) plugin.
